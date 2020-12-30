@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-context("", () => {
+context("create new opeartor", () => {
   const userName = "cory@induro.io";
   const userPassword = "Heleen33!";
 
@@ -8,13 +8,9 @@ context("", () => {
     cy.visit("https://qa.scentconnect.com/login");
   });
 
-  //login
-  cy.customerPortalLogin( userName, userPassword);
+  it("", () => {
 
-  it("", () => {});
+    //creates a random user
+  })
 
-
-  //logout
-  cy.wait(7000);
-  cy.get('i[title="Log out"]').click();
 });

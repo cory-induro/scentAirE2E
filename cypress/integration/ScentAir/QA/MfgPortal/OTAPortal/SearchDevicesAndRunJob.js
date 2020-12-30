@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-// const { get } = require("cypress/types/lodash");
-
 context("OTA process, checks all search options, selects a device, downgrades it, upgrades that same device and checks has been upgraded", () => {
   
   //Login credentials
@@ -36,15 +34,15 @@ context("OTA process, checks all search options, selects a device, downgrades it
       .get('[type="reset"]').click()
 
     //search via firmware version
-    cy.get(".col-9 > .d-flex > :nth-child(1)").type("0.0." + upgrade)
-      .get(".d-flex > :nth-child(3)").type("0.0." + upgrade)
+    cy.get(".col-9 > .d-flex > :nth-child(1)").type(`0.0.${upgrade}`)
+      .get(".d-flex > :nth-child(3)").type(`0.0.${upgrade}`)
       .get('[type="submit"]').click()
       .wait(7000)
 
     //start firmware downgrade
     cy.get(":nth-child(2) > .checkbox-cell > input").check().should('be.checked')
       .get(".align-items-end > .btn").click()
-      .get('select[id="firmwareVersion"]').select('0.0.' + downgrade).should('have.value', 'scent.connect.2_0.0.' + downgrade + '.bin')
+      .get('select[id="firmwareVersion"]').select(`0.0.${downgrade}`).should('have.value', `scent.connect.2_0.0.${downgrade}.bin`)
       .get('.modal-footer > .btn-primary').click()
       .wait(80000)
     
@@ -53,21 +51,21 @@ context("OTA process, checks all search options, selects a device, downgrades it
     //otherwise it will always upgrade to the current stated variable.
     cy.get("#assets").click()
       .get('[type="reset"]').click()
-      .get(".col-9 > .d-flex > :nth-child(1)").type("0.0." + downgrade)
-      .get(".d-flex > :nth-child(3)").type("0.0." + downgrade)
+      .get(".col-9 > .d-flex > :nth-child(1)").type(`0.0.${downgrade}`)
+      .get(".d-flex > :nth-child(3)").type(`0.0.${downgrade}`)
       .get('[type="submit"]').click()
       .wait(7000)
       .get(".checkbox-cell > input").check().should('be.checked')
       .get(".align-items-end > .btn").click()
-      .get('select[id="firmwareVersion"]').select("0.0." + upgrade).should('have.value', 'scent.connect.2_0.0.' + upgrade + '.bin')
+      .get('select[id="firmwareVersion"]').select(`0.0.${upgrade}`).should('have.value', `scent.connect.2_0.0.${upgrade}.bin`)
       .get('.modal-footer > .btn-primary').click()
       .wait(80000)
 
     //search for device again to ensure upgrade was completed
     cy.get('#assets').click()
       .get('[type="reset"]').click()
-      .get(".col-9 > .d-flex > :nth-child(1)").type("0.0." + upgrade)
-      .get(".d-flex > :nth-child(3)").type("0.0." + upgrade)
+      .get(".col-9 > .d-flex > :nth-child(1)").type(`0.0.${upgrade}`)
+      .get(".d-flex > :nth-child(3)").type(`0.0.${upgrade}`)
       .get('[type="submit"]').click()
       .wait(7000)
 
