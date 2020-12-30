@@ -1,0 +1,27 @@
+[
+  {
+    "customerPortal": {
+      "customerPortalUserName": "cory@induro.io",
+      "customerPortalPassword": "Heleen33"
+    }
+  },
+  {
+    "mfgOperatorPermissions": {
+      "mfgOperatorUserName": "cory+operator@induro.io",
+      "mfgOperatorPassword": "Heleen33"
+    }
+  },
+  {
+    "mfgManagerPermissions": {
+      "mfgManagerUserName": "cory+mfg@induro.io",
+      "mfgManagerPassword": "Heleen33!"
+    }
+  },
+  {
+      "mfgOTAPermissions": {
+          "mfgOTAUserName": "cory+fe@induro.io",
+          "mfgOTAPassword": "Heleen33!"
+      }
+  }
+    
+]
