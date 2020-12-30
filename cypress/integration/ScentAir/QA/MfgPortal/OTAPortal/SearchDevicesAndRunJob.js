@@ -27,14 +27,12 @@ context("OTA process, checks all search options, selects a device, downgrades it
       .get('select[id="loc-filter"]').select("blorp").should("have.value", "bxBqTW8QgoLJ8IxzgYrm") 
       .get('[type="submit"]').click()
       .wait(7000)
-      .screenshot('viewport')
       .get('[type="reset"]').click()
 
     //search via hardware type  
     cy.get('select[id="type-filter"]').select("ScentDirect").should("have.value", "SCENT_DIRECT")
       .get('[type="submit"]').click()
       .wait(7000)
-      .screenshot('viewport')
       .get('[type="reset"]').click()
 
     //search via firmware version
@@ -42,7 +40,6 @@ context("OTA process, checks all search options, selects a device, downgrades it
       .get(".d-flex > :nth-child(3)").type("0.0." + upgrade)
       .get('[type="submit"]').click()
       .wait(7000)
-      .screenshot('viewport')
 
     //start firmware downgrade
     cy.get(":nth-child(2) > .checkbox-cell > input").check().should('be.checked')
@@ -73,7 +70,6 @@ context("OTA process, checks all search options, selects a device, downgrades it
       .get(".d-flex > :nth-child(3)").type("0.0." + upgrade)
       .get('[type="submit"]').click()
       .wait(7000)
-      .screenshot('viewport')
 
     //logout  
     cy.get('i[title="Log out"]').click();
