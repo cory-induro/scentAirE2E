@@ -63,7 +63,7 @@ context("create new user", () => {
       .get('button[type="submit"]').click()
 
     //logout
-    cy.wait(8000);
+    cy.wait(10000);
     cy.get('i[title="Log out"]').click();
   });
 

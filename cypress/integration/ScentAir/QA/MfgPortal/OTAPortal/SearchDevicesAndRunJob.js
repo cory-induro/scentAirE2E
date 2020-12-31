@@ -10,12 +10,9 @@ context("OTA process, checks all search options, selects a device, downgrades it
   const downgrade = '24';
   const upgrade = '32'
 
-  beforeEach(() => {
-    cy.visit("https://qa.mfg.scentconnect.com/login");
-  });
-
   //check search options and 
-  it("logs in user and navigates to assets page", () => {
+  it("logs in user, navigates to assets page, checks search options", () => {
+    cy.visit("https://qa.mfg.scentconnect.com/login");
     cy.mfgPortalLogin(otaUserName, userPassword);
     cy.location("pathname").should("eq", "/ota-console");
     cy.get("#assets").click();
@@ -26,26 +23,34 @@ context("OTA process, checks all search options, selects a device, downgrades it
       .get('[type="submit"]').click()
       .wait(7000)
       .get('[type="reset"]').click()
+    cy.screenshot()
 
     //search via hardware type  
     cy.get('select[id="type-filter"]').select("ScentDirect").should("have.value", "SCENT_DIRECT")
       .get('[type="submit"]').click()
       .wait(7000)
       .get('[type="reset"]').click()
+    cy.screenshot()
 
     //search via firmware version
     cy.get(".col-9 > .d-flex > :nth-child(1)").type(`0.0.${upgrade}`)
       .get(".d-flex > :nth-child(3)").type(`0.0.${upgrade}`)
       .get('[type="submit"]').click()
       .wait(7000)
+    cy.screenshot()
 
-    //start firmware downgrade
+    })
+    
+  it("it selects a device and downgrades the software", () => {
+      //start firmware downgrade
     cy.get(":nth-child(2) > .checkbox-cell > input").check().should('be.checked')
       .get(".align-items-end > .btn").click()
       .get('select[id="firmwareVersion"]').select(`0.0.${downgrade}`).should('have.value', `scent.connect.2_0.0.${downgrade}.bin`)
       .get('.modal-footer > .btn-primary').click()
       .wait(80000)
+    })
     
+  it("clears from, searches for newly downgraded device, selects and upgrades it to the defined firmware version", () => {
     //search for downgraded device and upgrade to highest firmware. If firmware upgrades have occured you must
     //update the variable at the top of the page for this program to update to the latest firmware version
     //otherwise it will always upgrade to the current stated variable.
@@ -55,13 +60,15 @@ context("OTA process, checks all search options, selects a device, downgrades it
       .get(".d-flex > :nth-child(3)").type(`0.0.${downgrade}`)
       .get('[type="submit"]').click()
       .wait(7000)
-      .get(".checkbox-cell > input").check().should('be.checked')
+    cy.screenshot()
+    cy.get(".checkbox-cell > input").check().should('be.checked')
       .get(".align-items-end > .btn").click()
       .get('select[id="firmwareVersion"]').select(`0.0.${upgrade}`).should('have.value', `scent.connect.2_0.0.${upgrade}.bin`)
       .get('.modal-footer > .btn-primary').click()
       .wait(80000)
-
-    //search for device again to ensure upgrade was completed
+    })
+    
+  it("checks that the device has been updated and takes a snapshot", () => {
     cy.get('#assets').click()
       .get('[type="reset"]').click()
       .get(".col-9 > .d-flex > :nth-child(1)").type(`0.0.${upgrade}`)
@@ -69,8 +76,9 @@ context("OTA process, checks all search options, selects a device, downgrades it
       .get('[type="submit"]').click()
       .wait(7000)
 
+    cy.screenshot()
     //logout  
     cy.get('i[title="Log out"]').click();
-  })
-  
+    })
+
 });

@@ -14,14 +14,14 @@
 Cypress.Commands.add("customerPortalLogin", (userName, userPassword) => {
   cy.get('input[name="email"]').type(userName);
   cy.get('input[name="password"]').type(userPassword);
-  cy.wait(1000)
+  cy.wait(2000)
   cy.get(".btn").click();
 });
 
 Cypress.Commands.add("mfgPortalLogin", (email, password) => {
   cy.get('input[name="email"]').type(email);
   cy.get('input[name="password"]').type(password);
-  cy.wait(1000)
+  cy.wait(2000)
   cy.get(".btn").click();
 });
 // -- This is a child command --
