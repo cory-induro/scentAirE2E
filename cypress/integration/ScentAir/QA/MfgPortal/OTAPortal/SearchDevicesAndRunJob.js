@@ -8,7 +8,10 @@ context("OTA process, checks all search options, selects a device, downgrades it
   
   //firmware versions
   const downgrade = '24';
-  const upgrade = '32'
+  const upgrade = '32';
+
+  //device search
+  const testDevice = '24-6F-28-D5-CE-74'
 
   //check search options and 
   it("logs in user, navigates to assets page, checks search options", () => {
@@ -43,7 +46,7 @@ context("OTA process, checks all search options, selects a device, downgrades it
     
   it("it selects a device and downgrades the software", () => {
       //start firmware downgrade
-    cy.get(":nth-child(2) > .checkbox-cell > input").check().should('be.checked')
+    cy.contains(`${testDevice}`).click()
       .get(".align-items-end > .btn").click()
       .get('select[id="firmwareVersion"]').select(`0.0.${downgrade}`).should('have.value', `scent.connect.2_0.0.${downgrade}.bin`)
       .get('.modal-footer > .btn-primary').click()
@@ -61,7 +64,8 @@ context("OTA process, checks all search options, selects a device, downgrades it
       .get('[type="submit"]').click()
       .wait(7000)
     cy.screenshot()
-    cy.get(".checkbox-cell > input").check().should('be.checked')
+    
+    cy.contains(`${testDevice}`).click()
       .get(".align-items-end > .btn").click()
       .get('select[id="firmwareVersion"]').select(`0.0.${upgrade}`).should('have.value', `scent.connect.2_0.0.${upgrade}.bin`)
       .get('.modal-footer > .btn-primary').click()

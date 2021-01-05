@@ -8,7 +8,7 @@ context("MFG Portal login/logout for all permissions", () => {
   const manager = "mfg";
   const firmwareEngineer = "fe";
 
-  //Auth information
+  //Auth Information
   const kioskUserName = `cory+${kiosk}@induro.io`;
   const operatorUserName = `cory+${operator}@induro.io`;
   const mfgUserName = `cory+${manager}@induro.io`;
