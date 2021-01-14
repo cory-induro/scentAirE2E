@@ -1,14 +1,14 @@
 /// <reference types="cypress" />
 
 context("CRUD new manager", () => {
-    const userName = "cory+mfg@induro.io";
-    const userPassword = "Heleen33!";
+    const userName = Cypress.env("mfgManagerUserName");
+    const userPassword = Cypress.env("userPassword");
     const userFirstName = "Cory";
     const userFirstName2 = "Cory2";
 
   
     beforeEach(() => {
-      cy.visit("https://qa.mfg.scentconnect.com/login");
+      cy.visit(Cypress.env("qaMfgPortalURL"));
     });
 
     //creates a random manager

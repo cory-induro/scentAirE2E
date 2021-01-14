@@ -1,13 +1,13 @@
 /// <reference types="cypress" />
 
 context("create new user", () => {
-  const userName = "cory@induro.io";
-  const userPassword = "Heleen33!";
+  const userName = Cypress.env('customerPortalUserName');
+  const userPassword = Cypress.env('userPassword');
   const userFirstName = "Cory";
   const userFirstName2 = "Cory2"
 
   beforeEach(() => {
-    cy.visit("https://qa.scentconnect.com/login");
+    cy.visit(Cypress.env("qaCustomerPortalURL"));
   });
 
   //create random user name

@@ -19,9 +19,9 @@ context("SA Customer Portal Login", () => {
     const internalOperator = "internalOperator";
   
   //Auth Information
-    //main login
-    const userPassword = "Heleen33!";
+    //Password for each
 
+    const userPassword = Cypress.env('userPassword');
     //location login
     const locationViewerUserName = `cory+${locationViewer}@induro.io`;
     const locationOperatorUserName = `cory+${locationOperator}@induro.io`;
@@ -37,7 +37,7 @@ context("SA Customer Portal Login", () => {
     const internalManagerUserName = `cory+${internalManager}@induro.io`;
 
   beforeEach(() => {
-    cy.visit("https://qa.scentconnect.com/login");
+    cy.visit(Cypress.env('qaCustomerPortalURL'));
   });
 
   //Checks location permissions

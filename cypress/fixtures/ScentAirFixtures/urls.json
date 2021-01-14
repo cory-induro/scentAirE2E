@@ -1,8 +1,0 @@
-[
-    {
-        "qaCustomerPortalURL": "https://qa.scentconnect.com/login",
-        "qaMfgPortalURL": "https://qa.mfg.scentconnect.com/login",
-        "prodCustomerPortalURL": "https://scentconnect.com/login",
-        "prodMfgPortalUrl": "https://mfg.scentconnect.com/login"
-    }
-]

@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 
 context("CRUD new manufacturing location", () => {
-    const userName = "cory+mfg@induro.io";
-    const userPassword = "Heleen33!";
+    const userName = Cypress.env("mfgManagerUserName");
+    const userPassword = Cypress.env("userPassword");
     const timezone1 = "(EST) America/Cancun"
     const timezone2 = "(EST) America/New_York"
   
@@ -22,7 +22,7 @@ context("CRUD new manufacturing location", () => {
 
     it("logs in user, checks path name and creates new location", () => {
 
-        cy.visit("https://qa.mfg.scentconnect.com/login");
+        cy.visit(Cypress.env("qaMfgPortalURL"));
         
         //login
         cy.mfgPortalLogin(userName, userPassword);

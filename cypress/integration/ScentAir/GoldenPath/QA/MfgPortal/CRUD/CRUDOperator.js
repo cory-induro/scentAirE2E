@@ -1,15 +1,15 @@
 /// <reference types="cypress" />
 
 context("CRUD new operator", () => {
-    const userName = "cory+mfg@induro.io";
-    const userPassword = "Heleen33!";
+    const userName = Cypress.env("mfgManagerUserName");
+    const userPassword = Cypress.env("userPassword");
     const userFirstName = "Cory";
     const userFirstName2 = "Cory2";
     const locationId = "sQEdqDAbPoMiMe07jxQx"
 
   
     beforeEach(() => {
-      cy.visit("https://qa.mfg.scentconnect.com/login");
+      cy.visit(Cypress.env("qaMfgPortalURL"));
     });
 
     //creates a random kiosk user

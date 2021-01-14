@@ -3,19 +3,19 @@
 context("OTA process, checks all search options, selects a device, downgrades it, upgrades that same device and checks has been upgraded", () => {
   
   //Login credentials
-  const otaUserName = "cory+fe@induro.io";
-  const userPassword = "Heleen33!";
+  const otaUserName = Cypress.env("mfgOTAUserName");
+  const userPassword = Cypress.env("userPassword");
   
   //firmware versions
   const downgrade = '24';
   const upgrade = '32';
 
   //device search
-  const testDevice = '24-6F-28-D5-CE-74'
+  const testDevice = Cypress.env("qaTestDevice1");
 
   //check search options and 
   it("logs in user, navigates to assets page, checks search options", () => {
-    cy.visit("https://qa.mfg.scentconnect.com/login");
+    cy.visit(Cypress.env("qaMfgPortalURL"));
     cy.mfgPortalLogin(otaUserName, userPassword);
     cy.location("pathname").should("eq", "/ota-console");
     cy.get("#assets").click();

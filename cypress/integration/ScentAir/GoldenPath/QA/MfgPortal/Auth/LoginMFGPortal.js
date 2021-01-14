@@ -2,22 +2,16 @@
 
 context("MFG Portal login/logout for all permissions", () => {
   
-  //permission types
-  const kiosk = "kiosk";
-  const operator = "operator";
-  const manager = "mfg";
-  const firmwareEngineer = "fe";
-
   //Auth Information
-  const kioskUserName = `cory+${kiosk}@induro.io`;
-  const operatorUserName = `cory+${operator}@induro.io`;
-  const mfgUserName = `cory+${manager}@induro.io`;
-  const otaUserName = `cory+${firmwareEngineer}@induro.io`;
-  const userPassword = "Heleen33!";
+  const kioskUserName = Cypress.env("mfgKioskUserName");
+  const operatorUserName = Cypress.env("mfgOperatorUserName");
+  const mfgUserName = Cypress.env("mfgManagerUserName");
+  const otaUserName = Cypress.env("mfgOTAUserName");
+  const userPassword = Cypress.env("userPassword");
 
   //Visit site before each test run
   beforeEach(() => {
-    cy.visit("https://qa.mfg.scentconnect.com/login");
+    cy.visit(Cypress.env("qaMfgPortalURL"));
   });
 
   //Kiosk auth check
