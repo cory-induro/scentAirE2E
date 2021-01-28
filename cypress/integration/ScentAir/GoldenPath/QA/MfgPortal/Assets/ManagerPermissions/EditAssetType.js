@@ -98,21 +98,21 @@ context("Edit Asset Type and reset", () => {
           .get(':nth-child(3) > sc-week-picker.ng-untouched > :nth-child(5)').click()
 
         //Edit Scent Level
-        cy.get(':nth-child(7) > .col-10 > .row > :nth-child(1) > .ng5-slider > .ng5-slider-full-bar')
-          .invoke('val', 40 + '%')
-          .trigger('change', {force: true})
+        // cy.get(':nth-child(7) > .col-10 > .row > :nth-child(1) > .ng5-slider > .ng5-slider-full-bar')
+        //   .invoke('val', 40 + '%')
+        //   .trigger('change', {force: true})
 
-        cy.get(':nth-child(7) > .col-10 > .row > :nth-child(1) > .ng5-slider > .ng5-slider-model-value').should('have.value', '40%')
+        // cy.get(':nth-child(7) > .col-10 > .row > :nth-child(1) > .ng5-slider > .ng5-slider-model-value').should('have.value', '40%')
           // NEEDS WORK TO COMPLETE 
 
         //Edit Scent Time
                   
-
+        cy.get('i[title="Log out"]').click();
     })
 
-    it("checks default states have been reset and logs out user", () => {
+    // it("checks default states have been reset and logs out user", () => {
 
-    })
+    // })
 
     
 })

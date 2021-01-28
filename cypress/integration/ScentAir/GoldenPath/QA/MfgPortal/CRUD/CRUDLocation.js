@@ -58,6 +58,7 @@ context("CRUD new manufacturing location", () => {
         });
 
         cy.get('.btn-danger').click();
+        cy.wait(2000);
 
         cy.get('.toast-success').click();
 

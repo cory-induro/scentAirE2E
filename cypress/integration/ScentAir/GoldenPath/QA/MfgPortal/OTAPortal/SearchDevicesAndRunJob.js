@@ -8,7 +8,7 @@ context("OTA process, checks all search options, selects a device, downgrades it
   
   //firmware versions
   const downgrade = '24';
-  const upgrade = '32';
+  const upgrade = '34';
 
   //device search
   const testDevice = Cypress.env("qaTestDevice1");

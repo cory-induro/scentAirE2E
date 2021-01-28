@@ -54,7 +54,7 @@ context("CRUD new kiosk user", () => {
 
     it("logs in with the newly created kiosk user, to ensure user was created correctly", () => {
         cy.mfgPortalLogin(newUserEmail, userPassword);
-        cy.wait(2000)
+        cy.wait(3000)
         cy.location('pathname').should('eq', `/location/${locationId}/kiosk`);
         cy.screenshot();
         cy.get('i[title="Log out"]').click();

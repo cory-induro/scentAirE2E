@@ -61,9 +61,12 @@ context("create new user", () => {
       .get('input[id="receive-alerts"]').check().should('be.checked')
       .get('input[id="use-meridian-clock"]').check().should('be.checked')
       .get('button[type="submit"]').click()
+      .wait(5000)
+
+    cy.get('.toast-success').click();
 
     //logout
-    cy.wait(10000);
+    cy.wait(1000);
     cy.get('i[title="Log out"]').click();
   });
 
@@ -82,18 +85,34 @@ context("create new user", () => {
     cy.wait(1000)
 
     //Search for created user and open edit user modal
-    cy.contains(`${newUserEmail}`).parent('tr').within(() => {
-      cy.get('td').eq(6).find('i[class="fas fa-pencil action"]').click()
+    cy.get('body').then(($body) => {
+      if($body.text().includes(newUserEmail)){
+        cy.contains(`${newUserEmail}`).parent('tr').within(() => {
+          cy.get('td').eq(6).find('i[class="fas fa-pencil action"]').click()
+        })
+        cy.get('input[name="firstName"]').clear()
+          .get('input[name="firstName"]').type(userFirstName2)
+          .get('select[name="temp"]').select('Fahrenheit').should('have.value', '0: F')
+          .get('input[id="use-meridian-clock"]').uncheck().should('not.be.checked')
+          .get('button[type="submit"]').click()
+      }
+      else{
+        cy.get('.card-foot > sc-paginator > .page-control > .fa-chevron-right').click()
+        cy.contains(`${newUserEmail}`).parent('tr').within(() => {
+          cy.get('td').eq(6).find('i[class="fas fa-pencil action"]').click()
+        })
+        cy.get('input[name="firstName"]').clear()
+          .get('input[name="firstName"]').type(userFirstName2)
+          .get('select[name="temp"]').select('Fahrenheit').should('have.value', '0: F')
+          .get('input[id="use-meridian-clock"]').uncheck().should('not.be.checked')
+          .get('button[type="submit"]').click()
+      }
     })
 
-    //Update user information in modal and save
-    cy.get('input[name="firstName"]').clear()
-      .get('input[name="firstName"]').type(userFirstName2)
-      .get('select[name="temp"]').select('Fahrenheit').should('have.value', '0: F')
-      .get('input[id="use-meridian-clock"]').uncheck().should('not.be.checked')
-      .get('button[type="submit"]').click()
+    cy.get('.toast-success').click();
 
-    cy.wait(8000)
+    //logout
+    cy.wait(1000);
     cy.get('i[title="Log out"]').click();
   });
 
@@ -110,15 +129,27 @@ context("create new user", () => {
     cy.wait(1000)
 
     //Search for created user and open delete modal
-    cy.contains(`${newUserEmail}`).parent('tr').within(() => {
-      cy.get('td').eq(6).find('i[class="fas fa-trash action"]').click()
+
+    cy.get("body").then(($body) => {
+      if($body.text().includes(newUserEmail)){
+        cy.contains(`${newUserEmail}`).parent('tr').within(() => {
+          cy.get('td').eq(6).find('i[class="fas fa-trash action"]').click()
+        })
+        cy.get('.btn-danger').click()
+      }
+      else{
+        cy.get('.card-foot > sc-paginator > .page-control > .fa-chevron-right').click()
+        cy.contains(`${newUserEmail}`).parent('tr').within(() => {
+          cy.get('td').eq(6).find('i[class="fas fa-trash action"]').click()
+        })
+        cy.get('.btn-danger').click()
+      }
     })
 
-    //confirm delete
-    cy.get('.btn-danger').click()
+    cy.get('.toast-success').click();
 
     //logout
-    cy.wait(5000);
+    cy.wait(1000);
     cy.get('i[title="Log out"]').click();
   })
 });
