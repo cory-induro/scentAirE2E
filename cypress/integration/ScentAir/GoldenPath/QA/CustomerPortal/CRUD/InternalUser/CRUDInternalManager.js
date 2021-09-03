@@ -1,11 +1,14 @@
 /// <reference types="cypress" />
 
-context("create new user", () => {
+context("CRUD internal user manager", () => {
+  
+  //global veriables
   const userName = Cypress.env('customerPortalUserName');
   const userPassword = Cypress.env('userPassword');
   const userFirstName = "Cory";
-  const userFirstName2 = "Cory2"
+  const userFirstName2 = "Cory2";
 
+  //visit this url each time a new "it" function starts
   beforeEach(() => {
     cy.visit(Cypress.env("qaCustomerPortalURL"));
   });
@@ -13,7 +16,7 @@ context("create new user", () => {
   //create random user name
   const randomUserNames = () => {
     var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789";
 
     for (var i = 0; i < 10; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -21,11 +24,12 @@ context("create new user", () => {
     return text;
   }
 
+  //creates random user email for login
   const randomUserName = randomUserNames();
-  const newUserEmail = `${userFirstName}+${randomUserName}@induro.io`
+  const newUserEmail = `${userFirstName}+${randomUserName}@induro.io`;
 
   //create user
-  it("logs in user, navigates to users tab, creates new device manager", () => {
+  it("logs in user, navigates to users tab, creates new internal manager", () => {
     
     //login
     cy.customerPortalLogin( userName, userPassword);
@@ -71,7 +75,7 @@ context("create new user", () => {
   });
 
   //Read and update random user created above.
-  it('logs in as new user to check permission, and update information', () => {
+  it('logs in as new user to check permission, and updates information', () => {
 
     //login newly created user
     cy.customerPortalLogin(newUserEmail, userPassword)
@@ -116,11 +120,13 @@ context("create new user", () => {
     cy.get('i[title="Log out"]').click();
   });
 
+  //finds and deletes previouly created user
   it("logs in with updated information, finds the created updated user and deletes them", () => {
     
     //login newly created user
     cy.customerPortalLogin(newUserEmail, userPassword)
 
+    //check location
     cy.location('pathname').should('eq', '/organization-directory')
 
     //Check navigation to user directory

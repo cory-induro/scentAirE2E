@@ -1,1 +1,1 @@
-# scentAirE2E
+# ScentAir Automated Testing 

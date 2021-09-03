@@ -61,8 +61,18 @@ context("OTA process, checks all search options, selects a device, downgrades it
       .get('[type="reset"]').click()
       .get(".col-9 > .d-flex > :nth-child(1)").type(`0.0.${downgrade}`)
       .get(".d-flex > :nth-child(3)").type(`0.0.${downgrade}`)
-      .get('[type="submit"]').click()
-      .wait(7000)
+      .get('[type="submit"]').click();
+      /*let isDone = false;
+      for (let i = 0; i < 7; i++) {
+        cy.wait(1000);
+        // todo: check
+        isDone = true;
+        break;
+      }
+      if (!isDone) {
+        // fail
+      }*/
+
     cy.screenshot()
     
     cy.contains(`${testDevice}`).click()

@@ -2,8 +2,7 @@
 
 context("SA Customer Portal Login", () => {
   
-  //permission types
-
+  //Permission types
     //location specific
     const locationManager = "locationManager";
     const locationOperator = "locationOperator";

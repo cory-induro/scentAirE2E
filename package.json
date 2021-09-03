@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/cory-induro/scentAirE2E#readme",
   "devDependencies": {
-    "cypress": "^6.2.1"
+    "cypress": "^6.4.0"
   },
   "dependencies": {
     "dotenv": "^8.2.0"
